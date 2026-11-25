@@ -136,7 +136,7 @@ h1,h2{font-family:Anton,Impact,"Arial Narrow",sans-serif;font-weight:400;text-tr
         <li><span class="ic"></span><span>You get <b>60 seconds</b>. Answer as many questions as you can.</span></li>
         <li><span class="ic"></span><span>Every question says <b>solve for x</b>. Type the value of <b>x</b> and press <b>GO</b>.</span></li>
         <li><span class="ic"></span><span>You have <b>3 hearts</b>. Every wrong answer costs one heart.</span></li>
-        <li><span class="ic"></span><span>Fractions must be in <b>lowest form</b> — write 3/4, not 6/8.</span></li>
+        <li><span class="ic"></span><span>Fractions must be in <b>lowest form</b>, write 3/4, not 6/8.</span></li>
         <li><span class="ic"></span><span>Questions start easy and get <b>harder</b> as you go.</span></li>
       </ul>
 
@@ -255,7 +255,7 @@ h1,h2{font-family:Anton,Impact,"Arial Narrow",sans-serif;font-weight:400;text-tr
 "use strict";
 
 /* =========================================================
-   CONFIG — the only things you should need to change
+   CONFIG, the only things you should need to change
    ========================================================= */
 var CONFIG = {
   DURATION: 60,          // seconds per round
@@ -610,7 +610,7 @@ function submitAnswer(){
     S.score++; S.streak++;
     elScore.textContent = S.score;
     elScore.classList.remove("bump"); void elScore.offsetWidth; elScore.classList.add("bump");
-    elFb.textContent = S.streak >= 4 ? "🔥 " + S.streak + " in a row!" : "Correct!";
+    elFb.textContent = S.streak >= 4 ? "" + S.streak + " in a row!" : "Correct!";
     elFb.className = "ok";
     setFace("happy");
     sfxOk();
@@ -631,7 +631,7 @@ function submitAnswer(){
   sfxBad();
 
   if(isRight && !wasReduced && CONFIG.REQUIRE_REDUCED){
-    elFb.textContent = "Right value — but reduce! Write " + fmtFrac(truth);
+    elFb.textContent = "Right value, but reduce! Write " + fmtFrac(truth);
   } else {
     elFb.textContent = "x = " + fmtFrac(truth);
   }
@@ -662,20 +662,20 @@ function endGame(survived){
   var title = $("#endTitle"), msg = $("#endMsg");
 
   if(survived){
-    title.textContent = "Time's up — you survived!";
+    title.textContent = "Time's up, you survived!";
     title.className = "headline win";
     setFace("cheer");
     sfxWin();
     confetti();
     msg.textContent = S.score === 0
-      ? "You made it to the end with no correct answers — give it another go!"
+      ? "You made it to the end with no correct answers, give it another go!"
       : "Nice work, " + S.playerName + "! Your score is being sent to the leaderboard.";
   } else {
     title.textContent = "Out of hearts!";
     title.className = "headline lose";
     setFace("sad");
     msg.textContent = "You ran out of hearts after " + S.score +
-      " correct answer" + (S.score === 1 ? "" : "s") + ". You need to survive the full minute to get on the leaderboard — try again!";
+      " correct answer" + (S.score === 1 ? "" : "s") + ". You need to survive the full minute to get on the leaderboard, try again!";
   }
 
   show("s-end");
@@ -737,7 +737,7 @@ function renderBoard(){
   loadBoard(function(rows, remote){
     list.innerHTML = "";
     if(rows === null){
-      list.innerHTML = '<li class="msg">The leaderboard could not be reached right now — try again in a moment.</li>';
+      list.innerHTML = '<li class="msg">The leaderboard could not be reached right now, try again in a moment.</li>';
       return;
     }
     if(!rows.length){
