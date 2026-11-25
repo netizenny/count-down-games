@@ -70,7 +70,7 @@ body { background: var(--grain), var(--fibre), var(--color-paper); -webkit-user-
 .qcard.shake { animation: shake 0.4s var(--ease-snap); }
 @keyframes shake { 20% { translate: -12px 0; } 40% { translate: 10px 0; } 60% { translate: -6px 0; } 80% { translate: 3px 0; } }
 .prompt { font-size: var(--text-md); color: var(--color-ink-2); font-weight: 500; }
-.eq { font-weight: 600; letter-spacing: var(--tracking-display); line-height: 1.1; font-size: clamp(1.9rem, 5.2vw, 3.5rem); font-variant-numeric: tabular-nums; display: inline-block; align-self: center; padding: var(--space-sm) var(--space-lg); border-radius: var(--radius-stock); background: var(--grain), var(--color-card); box-shadow: 0 5px 0 0 var(--color-edge); max-width: 100%; text-wrap: balance; }
+.eq { font-weight: 600; letter-spacing: var(--tracking-display); line-height: 1.1; font-size: clamp(1.9rem, 5.2vw, 3.5rem); font-variant-numeric: tabular-nums; display: inline-block; align-self: center; padding: var(--space-sm) var(--space-lg); border-radius: var(--radius-stock); background: var(--grain), var(--color-card); box-shadow: 0 5px 0 0 var(--color-edge); max-width: 100%; white-space: nowrap; }
 .eq .var { color: var(--color-accent-2); }
 #feedback { min-height: 1.5em; font-weight: 600; }
 #feedback.ok { color: var(--color-mint-deep); }

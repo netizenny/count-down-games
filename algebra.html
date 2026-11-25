@@ -439,6 +439,14 @@ function startPlay(){
 /* =========================================================
    Questions
    ========================================================= */
+function fitEq(){
+  elEq.style.fontSize = "";
+  var card = elEq.parentElement, cs = getComputedStyle(card);
+  var avail = card.clientWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight);
+  var w = elEq.scrollWidth;
+  if(w > avail){ elEq.style.fontSize = Math.max(16, parseFloat(getComputedStyle(elEq).fontSize) * avail / w - 1) + "px"; }
+}
+window.addEventListener("resize", function(){ if(S.running) fitEq(); });
 function nextQuestion(){
   S.index++;
   S.cur = newQuestion(S.index);
@@ -448,6 +456,7 @@ function nextQuestion(){
   elFb.textContent = "";
   elFb.className = "";
   S.locked = false;
+  fitEq();
   elAnswer.focus({preventScroll:true});
 }
 
