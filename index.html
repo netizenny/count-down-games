@@ -1,4 +1,291 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Count Down Games</title>
-<style>body{font-family:system-ui,sans-serif;background:#cfeaff;display:flex;min-height:100vh;align-items:center;justify-content:center;margin:0}
-.c{display:grid;gap:16px;width:min(420px,90vw);text-align:center}h1{color:#22364a}a{display:block;padding:22px;border-radius:18px;background:#ffd23f;color:#22364a;font-weight:900;font-size:22px;text-decoration:none;box-shadow:0 6px 0 #dba500}</style></head>
-<body><div class="c"><h1>Count Down Games</h1><a href="polynomial.html">Polynomial Count Down</a><a href="algebra.html">Algebra Count Down</a></div></body></html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Count Down Games: free 60-second maths drills</title>
+<meta name="description" content="Free 60-second maths drills for high school students. Algebra Count Down and Polynomial Count Down, with a live top 10 and no login.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Work+Sans:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0034eb; --surface:#002fd6; --ink:#ffffff; --muted:#c5d0ff;
+  --accent:#e9e34a; --accent-ink:#111111;
+  --m:clamp(16px,2.2vw,32px);
+  --small:clamp(.875rem,.85rem + .1vw,.9375rem);
+  --body:clamp(1.0625rem,1rem + .25vw,1.1875rem);
+  --lead:clamp(1.25rem,1.1rem + .7vw,1.625rem);
+  --head:clamp(2.75rem,1.2rem + 5.4vw,5.75rem);
+  --display:clamp(5rem,10.4vw,11rem);
+  --xl:clamp(5rem,13vw,13rem);
+  --gap:clamp(120px,14vw,220px);
+  --ease:cubic-bezier(.2,.7,.2,1);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Work Sans",system-ui,sans-serif;font-size:var(--body);line-height:1.5}
+img{display:block;max-width:100%}
+a{color:inherit}
+h1,h2,.wordmark,.verb,.bigname{font-family:Anton,Impact,"Arial Narrow",sans-serif;font-weight:400;text-transform:uppercase;letter-spacing:-.01em;line-height:.9;margin:0}
+:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+::selection{background:var(--accent);color:var(--accent-ink)}
+
+.btn{display:inline-block;background:var(--accent);color:var(--accent-ink);font-weight:600;font-size:var(--body);text-decoration:none;padding:16px 28px;border:0;border-radius:0;cursor:pointer;font-family:inherit;transition:transform .18s var(--ease),background .18s}
+.btn:hover{transform:translateY(-3px)}
+.btn:active{transform:translateY(1px) scale(.98)}
+.link{font-weight:600;text-decoration:underline;text-underline-offset:.25em;text-decoration-thickness:2px}
+
+/* top bar */
+.top{position:absolute;inset:0 0 auto 0;display:flex;justify-content:space-between;align-items:center;padding:22px var(--m);z-index:2}
+.wordmark{font-size:1.5rem;letter-spacing:.01em;text-decoration:none}
+.top nav{display:flex;gap:28px;font-weight:600;font-size:var(--small)}
+.top nav a{text-decoration:none}
+.top nav a:hover{text-decoration:underline;text-underline-offset:.25em}
+
+/* hero */
+.hero{min-height:0;display:flex;flex-direction:column;justify-content:center;padding:clamp(150px,22vh,230px) var(--m) 0;position:relative}
+.sentence{display:flex;align-items:baseline;gap:.22em;font-size:var(--display);width:100%}
+.sentence .w{white-space:nowrap}
+.strip{flex:1;align-self:center;height:.72em;min-width:0;overflow:hidden;position:relative}
+.strip img{width:100%;height:100%;object-fit:cover;object-position:50% 52%;transform:scale(1.12);animation:drift 14s ease-in-out infinite alternate}
+@keyframes drift{from{transform:scale(1.12) translateY(-3%)}to{transform:scale(1.2) translateY(3%)}}
+.hero-foot{display:flex;flex-direction:column;align-items:center;gap:36px;margin-top:clamp(40px,8vh,120px);text-align:center}
+.hero-foot p{margin:0;max-width:40ch;font-size:var(--lead);line-height:1.35}
+
+/* games */
+section{padding:var(--gap) var(--m) 0}
+.head{font-size:var(--head);max-width:16ch}
+.games{display:grid;grid-template-columns:1fr 1fr;gap:var(--m);margin-top:clamp(40px,5vw,72px)}
+.game{background:var(--surface);display:flex;flex-direction:column}
+.game .pic{aspect-ratio:3/2;overflow:hidden}
+.game .pic img{width:100%;height:100%;object-fit:cover;transition:transform .8s var(--ease)}
+.game:hover .pic img{transform:scale(1.06)}
+.game .txt{padding:clamp(20px,2.4vw,36px);display:flex;flex-direction:column;gap:18px;flex:1}
+.game h2{font-size:var(--head)}
+.game p{margin:0;max-width:44ch}
+.sample{font-family:Anton,Impact,sans-serif;text-transform:none;font-size:var(--lead);letter-spacing:.02em;color:var(--accent)}
+.game .btn{align-self:flex-start;margin-top:auto}
+
+/* verbs */
+.steps{padding:var(--gap) 0 0}
+.steps .head{padding:0 var(--m);margin-bottom:clamp(40px,5vw,72px)}
+.panel{position:relative;height:100svh;overflow:hidden}
+.panel>img{grid-area:1/1;width:100%;height:100%;min-height:0;object-fit:cover;filter:brightness(.5)}
+
+.panel{display:grid;grid-template:minmax(0,100%)/minmax(0,100%);place-items:center}
+.panel .verb{grid-area:1/1;position:relative;z-index:1;text-align:center;font-size:var(--xl);color:#fff;margin:0;transition:transform .6s var(--ease),opacity .6s}
+.js .panel .verb{transform:translateY(60px) scale(.94)}
+.js .panel.in .verb{transform:none}
+.panel>img{transform:scale(1.14);transition:transform 1.2s var(--ease)}
+.panel.in>img{transform:none}
+.panel .say{grid-area:1/1;align-self:end;justify-self:start;position:relative;margin:0 var(--m) var(--m);z-index:1;max-width:34ch;font-size:var(--lead);line-height:1.35;color:#fff}
+
+/* leaderboard */
+.lb{display:grid;grid-template-columns:repeat(12,1fr);gap:0 var(--m);align-items:start}
+.lb .head{grid-column:1/-1;max-width:none;padding-left:3vw}
+.board{grid-column:7/13;margin-top:clamp(48px,6vw,96px)}
+.tabs{display:flex;gap:12px;margin-bottom:28px}
+.tab{font:inherit;font-weight:600;font-size:var(--body);background:var(--surface);color:var(--ink);border:0;border-radius:0;padding:12px 22px;cursor:pointer;transition:transform .18s var(--ease)}
+.tab:hover{transform:translateY(-2px)}
+.tab[aria-pressed="true"]{background:var(--ink);color:var(--bg)}
+.rows{list-style:none;margin:0;padding:0;font-size:var(--lead)}
+.rows li{display:grid;grid-template-columns:3ch 1fr auto;gap:18px;padding:13px 0;font-variant-numeric:tabular-nums}
+.rows li:nth-child(4){margin-top:30px}
+.rows .rk{color:var(--muted)}
+.rows .sc{font-weight:600}
+.rows .msg{display:block;color:var(--muted)}
+.lbpic{grid-column:1/5;grid-row:2;align-self:end;margin-top:clamp(48px,6vw,96px)}
+.lbpic img{width:100%;aspect-ratio:4/5;object-fit:cover}
+
+/* cta */
+.cta{margin-top:var(--gap);background:var(--ink);color:var(--bg);padding:clamp(40px,6vw,96px) var(--m) var(--m);display:flex;flex-direction:column;gap:clamp(72px,9vw,140px)}
+.cta h2{font-size:var(--xl);line-height:.88}
+.cta-foot{display:grid;grid-template-columns:repeat(12,1fr);gap:var(--m);align-items:end}
+.cta-foot p{grid-column:1/6;max-width:40ch;margin:0;font-size:var(--lead);line-height:1.35}
+.cta-foot .btn{grid-column:9/13;justify-self:end;text-align:center;padding:20px 40px}
+
+/* footer */
+footer{background:var(--surface);padding:clamp(40px,5vw,72px) var(--m) var(--m);display:flex;flex-direction:column;gap:0}
+.fnotes{display:flex;justify-content:space-between;gap:var(--m);font-size:var(--small);color:var(--muted)}
+.bigname{font-size:10.7vw;white-space:nowrap;line-height:.9;margin-top:72px;display:block}
+.credits{margin:40px 0 0;font-size:var(--small);color:var(--muted);line-height:1.6;max-width:62ch}
+.credits a{color:var(--ink)}
+
+/* motion */
+.rv{transform:translateY(32px);transition:opacity .45s var(--ease),transform .45s var(--ease);transition-delay:var(--d,0ms)}
+.rv.in{transform:none}
+.panel.rv{transform:none}
+.sentence .w{display:inline-block;opacity:0;transform:translateY(40px);animation:up .9s var(--ease) forwards}
+.sentence .w:nth-child(1){animation-delay:.1s}.sentence .w:nth-child(3){animation-delay:.3s}
+.sentence .strip{opacity:0;animation:fade 1s .2s var(--ease) forwards}
+@keyframes up{to{opacity:1;transform:none}}
+@keyframes fade{to{opacity:1}}
+.hero-foot>*{opacity:0;animation:up .8s var(--ease) forwards}
+.hero-foot p{animation-delay:.55s}.hero-foot .btn{animation-delay:.7s}
+.no-js .rv{transform:none}
+@media (prefers-reduced-motion:reduce){
+  .rv,.sentence .w,.sentence .strip,.hero-foot>*{opacity:1!important;transform:none!important;animation:none!important;transition:none!important}
+  .strip img{animation:none}
+  html{scroll-behavior:auto}
+}
+
+/* phone */
+@media (max-width:760px){
+  .top nav{gap:18px}
+  .top nav a:first-child{display:none}
+  .hero{padding-top:88px}
+  .sentence{flex-direction:column;align-items:stretch;font-size:clamp(5.5rem,24vw,9rem);gap:.06em}
+  .strip{height:auto;aspect-ratio:2/1;flex:none;align-self:stretch}
+  .hero-foot{align-items:flex-start;text-align:left;margin-top:36px}
+  .games{grid-template-columns:1fr}
+  .panel .verb{font-size:clamp(6rem,30vw,10rem)}
+  .lb .head{padding-left:0}
+  .board{grid-column:1/-1}
+  .lbpic{grid-column:1/-1;grid-row:3;width:60%;justify-self:end}
+  .cta h2{font-size:clamp(4.5rem,22vw,9rem)}
+  .cta-foot{grid-template-columns:1fr;gap:24px}
+  .cta-foot p,.cta-foot .btn{grid-column:1/-1}
+  .cta-foot .btn{justify-self:stretch}
+  .fnotes{flex-direction:column;gap:6px}
+  .bigname{font-size:clamp(3.4rem,17vw,8rem);white-space:normal;margin-top:64px}
+}
+</style>
+</head>
+<body class="no-js">
+<script>document.body.className="js"</script>
+
+<header class="top">
+  <a class="wordmark" href="#top">Count Down</a>
+  <nav><a href="#games">The games</a><a href="#leaderboard">Top 10</a></nav>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <h1 class="sentence" aria-label="Beat the clock">
+      <span class="w">Beat</span>
+      <span class="strip"><img src="assets/watch.jpg" width="1600" height="1600" alt="The brass movement of an old pocket watch, gears and springs"></span>
+      <span class="w">the clock</span>
+    </h1>
+    <div class="hero-foot">
+      <p>Free 60-second maths drills. Algebra and polynomials, a live top 10, no login.</p>
+      <a class="btn" href="#games">Pick a drill</a>
+    </div>
+  </section>
+
+  <section id="games">
+    <h2 class="head rv">Two drills. Sixty seconds each.</h2>
+    <div class="games">
+      <article class="game rv">
+        <div class="pic"><img src="assets/abacus.jpg" width="1600" height="869" alt="A wooden abacus with red beads"></div>
+        <div class="txt">
+          <h2 class="rv">Algebra Count Down</h2>
+          <p class="rv" style="--d:100ms">Solve for x until the clock or your three hearts run out. One-step equations first, then negatives and fractions.</p>
+          <span class="sample rv" style="--d:180ms">3x + 5 = 20</span>
+          <a class="btn rv" style="--d:260ms" href="algebra.html">Play Algebra</a>
+        </div>
+      </article>
+      <article class="game rv" style="--d:120ms">
+        <div class="pic"><img src="assets/sliderule.jpg" width="1600" height="963" alt="A wooden slide rule with a printed table of constants"></div>
+        <div class="txt">
+          <h2 class="rv">Polynomial Count Down</h2>
+          <p class="rv" style="--d:100ms">Chapter 3 at speed: remainders, factor theorem, Vieta's formulas, asymptotes and end behaviour.</p>
+          <span class="sample rv" style="--d:180ms">P(x) = x³ − 5x² + 2x − 5</span>
+          <a class="btn rv" style="--d:260ms" href="polynomial.html">Play Polynomials</a>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <div class="steps">
+    <h2 class="head rv">How a round goes.</h2>
+    <div class="panel rv">
+      <img src="assets/sundial.jpg" width="1600" height="1200" alt="A bronze sundial bowl with an engraved grid">
+      <p class="verb" aria-hidden="true">Solve</p>
+      <p class="say">One question at a time. Type the number, press go, and the next one lands in a fraction of a second.</p>
+    </div>
+    <div class="panel rv">
+      <img src="assets/watch.jpg" width="1600" height="1600" alt="The movement of a pocket watch" style="object-position:50% 45%">
+      <p class="verb" aria-hidden="true">Survive</p>
+      <p class="say">Sixty seconds on the clock and three hearts. A wrong answer costs a heart, so speed only counts if you are right.</p>
+    </div>
+    <div class="panel rv">
+      <img src="assets/abacus.jpg" width="1600" height="869" alt="Rows of red abacus beads">
+      <p class="verb" aria-hidden="true">Climb</p>
+      <p class="say">Your score goes straight onto the shared top 10. No account, just a name.</p>
+    </div>
+  </div>
+
+  <section id="leaderboard" class="lb">
+    <h2 class="head rv">Who is fastest right now?</h2>
+    <div class="board rv">
+      <div class="tabs" role="group" aria-label="Choose a leaderboard">
+        <button class="tab" data-g="algebra" aria-pressed="true">Algebra</button>
+        <button class="tab" data-g="polynomial" aria-pressed="false">Polynomials</button>
+      </div>
+      <ol class="rows" id="rows" aria-live="polite"><li class="msg">Loading the top 10…</li></ol>
+    </div>
+    <div class="lbpic rv"><img src="assets/sundial.jpg" width="1600" height="1200" alt="Detail of a bronze sundial, its grid engraved in the bowl" style="object-position:55% 45%"></div>
+  </section>
+
+  <section class="cta" aria-labelledby="ctah">
+    <h2 id="ctah" class="rv">Beat a friend</h2>
+    <div class="cta-foot">
+      <p>Send them the link. Whoever solves the most in sixty seconds takes the top of the board.</p>
+      <a class="btn" href="algebra.html">Start the clock</a>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="fnotes"><span>Count Down Games</span><span>Free maths drills, no login</span><a class="link" href="#top">Back to top</a></div>
+  <div>
+    <span class="bigname" aria-hidden="true">Count Down Games</span>
+    <p class="credits">Pictures, all from Wikimedia Commons:
+      <a href="https://commons.wikimedia.org/wiki/File:Longines_4_Grand_Prix_pocket_watch_-_clockwork_visible_-_enhanced_resolution_DSF3402-PSMS.jpg">Longines pocket watch movement</a> by Franz van Duns, CC BY-SA 4.0;
+      <a href="https://commons.wikimedia.org/w/index.php?curid=107274996">Chinese abacus</a> by Jccsvq, CC0;
+      <a href="https://commons.wikimedia.org/wiki/File:2023_Suwak_logarytmiczny_(2).jpg">Slide rule</a> by Jacek Halicki, CC BY-SA 4.0;
+      <a href="https://commons.wikimedia.org/w/index.php?curid=2798816">Gyeongbokgung sundial</a> by Bernat, CC BY-SA 2.0.</p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var io = "IntersectionObserver" in window ? new IntersectionObserver(function(es){
+    es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add("in"); io.unobserve(e.target); } });
+  },{threshold:0,rootMargin:"0px 0px 12% 0px"}) : null;
+  document.querySelectorAll(".rv").forEach(function(el){ io ? io.observe(el) : el.classList.add("in"); });
+
+  var SB="https://ydxsmynagzcdrwxjigjh.supabase.co";
+  var KEY="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlkeHNteW5hZ3pjZHJ3eGppZ2poIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTU1MjcyODUsImV4cCI6MjExMTEwMzI4NX0.hHm3HX70GkGYsO0CjVCzieZWcDXFQ_c0QYhM-qYTuAs";
+  var rows=document.getElementById("rows");
+  function show(list,text){
+    rows.textContent="";
+    if(!list||!list.length){ var li=document.createElement("li"); li.className="msg"; li.textContent=text; rows.appendChild(li); return; }
+    list.slice(0,10).forEach(function(r,i){
+      var li=document.createElement("li");
+      var a=document.createElement("span"); a.className="rk"; a.textContent=i+1;
+      var b=document.createElement("span"); b.textContent=String(r.name);
+      var c=document.createElement("span"); c.className="sc"; c.textContent=r.score;
+      li.append(a,b,c); rows.appendChild(li);
+    });
+  }
+  function load(g){
+    show(null,"Loading the top 10…");
+    var done=false, t=setTimeout(function(){ if(!done){done=true; show(null,"The board could not be reached. Try again in a moment.");} },9000);
+    fetch(SB+"/rest/v1/rpc/top10",{method:"POST",headers:{apikey:KEY,Authorization:"Bearer "+KEY,"Content-Type":"application/json"},body:JSON.stringify({g:g})})
+      .then(function(r){ if(!r.ok) throw 0; return r.json(); })
+      .then(function(d){ if(done) return; done=true; clearTimeout(t); show(d,"No scores yet. Be the first."); })
+      .catch(function(){ if(done) return; done=true; clearTimeout(t); show(null,"The board could not be reached. Try again in a moment."); });
+  }
+  document.querySelectorAll(".tab").forEach(function(b){
+    b.addEventListener("click",function(){
+      document.querySelectorAll(".tab").forEach(function(x){ x.setAttribute("aria-pressed",x===b); });
+      load(b.dataset.g);
+    });
+  });
+  load("algebra");
+})();
+</script>
+</body>
+</html>
