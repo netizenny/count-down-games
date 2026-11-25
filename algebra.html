@@ -7,8 +7,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Anton&family=Work+Sans:wght@400;600&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#0034eb; --surface:#002fd6; --deep:#0027b8; --ink:#fff; --muted:#c5d0ff;
-  --accent:#e9e34a; --accent-ink:#111; --bad:#ff9aa0;
+  --blue:#0034eb; --bg:#eaf0ff; --surface:#d6e1ff; --deep:#c3d2ff; --ink:#0a1a5c; --muted:#47579a;
+  --accent:#e9e34a; --accent-ink:#111; --bad:#c1121f;
   --m:clamp(16px,2.2vw,32px);
   --ease:cubic-bezier(.2,.7,.2,1);
 }
@@ -27,7 +27,7 @@ h1,h2{font-family:Anton,Impact,"Arial Narrow",sans-serif;font-weight:400;text-tr
 .backlink{align-self:flex-start;color:var(--muted);font-size:.9375rem;font-weight:600;text-decoration:underline;text-underline-offset:.25em}
 .backlink:hover{color:var(--ink)}
 .logo{display:flex;flex-direction:column;gap:.1em}
-.logo .a{font-family:Anton,Impact,sans-serif;font-size:clamp(3.5rem,13vw,8.5rem);line-height:.9;color:var(--ink)}
+.logo .a{font-family:Anton,Impact,sans-serif;font-size:clamp(3.5rem,13vw,8.5rem);line-height:.9;color:var(--blue)}
 .logo .b{font-family:Anton,Impact,sans-serif;font-size:clamp(1.75rem,5.4vw,3.5rem);line-height:.95;color:var(--muted)}
 .mascot{display:none}
 .rules{list-style:none;margin:0;padding:0;display:grid;gap:10px;max-width:56ch}
@@ -53,13 +53,13 @@ h1,h2{font-family:Anton,Impact,"Arial Narrow",sans-serif;font-weight:400;text-tr
 #s-play{justify-content:flex-start;gap:clamp(14px,2.2vh,26px);max-width:900px;margin:0 auto;left:0;right:0}
 .hud{width:100%;display:grid;grid-template-columns:auto 1fr auto auto;align-items:center;gap:clamp(12px,2vw,28px)}
 .hearts{display:flex;gap:8px}
-.heart{display:block;width:clamp(18px,2.6vw,26px);height:clamp(18px,2.6vw,26px);background:var(--ink);transition:transform .3s var(--ease),background .3s;font-size:0}
+.heart{display:block;width:clamp(18px,2.6vw,26px);height:clamp(18px,2.6vw,26px);background:var(--blue);transition:transform .3s var(--ease),background .3s;font-size:0}
 .heart.lost{background:var(--deep)}
 .heart.pulse{animation:pulse .5s var(--ease)}
 @keyframes pulse{50%{transform:scale(1.5)}}
 .timerwrap{display:flex;align-items:center;gap:14px}
 .timerbar{flex:1;height:14px;background:var(--deep)}
-#timerfill{height:100%;width:100%;background:var(--ink)}
+#timerfill{height:100%;width:100%;background:var(--blue)}
 #timerfill.warn{background:var(--muted)}
 #timerfill.danger{background:var(--bad)}
 #clock{font-family:Anton,Impact,sans-serif;font-size:clamp(2rem,5vw,3rem);min-width:2.2ch;text-align:right;font-variant-numeric:tabular-nums}
@@ -84,12 +84,13 @@ h1,h2{font-family:Anton,Impact,"Arial Narrow",sans-serif;font-weight:400;text-tr
 #feedback.hint{color:var(--muted);font-weight:400}
 .answerRow{width:100%;display:flex;gap:12px}
 .answerRow #answer{flex:1;min-width:0;text-align:center}
-#answer.badflash{background:#7a1f3a}
+#answer.badflash{background:#ffd0d4}
 .answerRow .btn{padding:0 clamp(24px,4vw,48px)}
 .keypad{width:100%;display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
 .key{font-family:Anton,Impact,sans-serif;font-size:clamp(1.5rem,4vw,2.25rem);background:var(--surface);color:var(--ink);border:0;border-radius:0;padding:clamp(12px,2.2vh,22px) 0;cursor:pointer;transition:transform .12s var(--ease),background .12s}
 .key:hover{background:var(--deep)}
 .key:active{transform:scale(.95)}
+.key:hover{background:var(--deep)}
 .key.goKey{grid-column:span 2;background:var(--accent);color:var(--accent-ink);font-family:"Work Sans",sans-serif;font-weight:600;font-size:1.25rem}
 
 .headline{font-family:Anton,Impact,sans-serif;text-transform:uppercase;font-size:clamp(2.75rem,8vw,5.5rem);line-height:.92;font-weight:400;margin:0}
@@ -690,7 +691,7 @@ function endGame(survived){
 function confetti(){
   var wrap = document.createElement("div");
   wrap.className = "confetti";
-  var colours = ["#ffffff","#e9e34a","#c5d0ff"];
+  var colours = ["#0034eb","#e9e34a","#0a1a5c"];
   for(var i=0;i<60;i++){
     var p = document.createElement("i");
     p.style.left = Math.random()*100 + "vw";
